@@ -1,0 +1,16 @@
+server:
+  port: 9006
+spring:
+  application:
+    name: livegoods-buytime
+  profiles:
+    active: mongodb
+  cloud:
+    config:
+      uri: http://localhost:9010
+      label: master
+      name: livegoods
+      profile: dev
+logging:
+  pattern:
+    console: '%d{MM/dd HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'

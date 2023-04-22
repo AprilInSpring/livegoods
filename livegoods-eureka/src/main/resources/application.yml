@@ -1,0 +1,14 @@
+#项目端口
+server:
+  port: 8761
+#项目名称
+spring:
+  application:
+    name: livegoods-eureka-server
+#eureka配置
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: false
+    register-with-eureka: false

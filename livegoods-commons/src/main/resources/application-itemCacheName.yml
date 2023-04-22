@@ -1,0 +1,6 @@
+livegoods:
+  cache:
+    names:
+      item:
+        prefix: cc:livegoods:details
+        suffix: getDetails

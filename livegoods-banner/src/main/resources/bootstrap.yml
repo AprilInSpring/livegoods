@@ -1,0 +1,20 @@
+server:
+  port: 9000
+  profiles:
+    active: 、mongodb  #bannerNginx,此处添加rabbit配置，目的是自动刷新configServer的配置
+  cloud:
+    config:
+      uri: http://localhost:9010
+      label: master
+      name: livegoods
+      profile: dev
+#暴露健康检查端口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
+
+logging:
+  pattern:
+    console: '%d{MM/dd HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'

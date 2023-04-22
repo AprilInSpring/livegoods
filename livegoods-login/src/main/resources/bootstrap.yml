@@ -1,0 +1,21 @@
+server:
+  port: 9007
+spring:
+  application:
+    name: livegoods-login
+  profiles:
+    active: redis,mongodb
+  cloud:
+    config:
+      uri: http://localhost:9010
+      label: master
+      name: livegoods
+      profile: dev
+
+logging:
+  pattern:
+    console: '%d{MM/dd HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'
+
+message:
+  accessKeyId: LTAI5tE3AbUWkfbSCobrEo59
+  accessKeySecret: W0PRgTu1EcMp7mxL2dQtHp41PQDDjT

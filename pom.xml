@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cc</groupId>
+    <artifactId>livegoods</artifactId>
+    <!--父项目-->
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <!--子项目-->
+    <modules>
+        <module>livegoods-eureka</module>
+        <module>livegoods-banner</module>
+        <module>livegoods-config-server</module>
+        <module>livegoods-buyaction</module>
+        <module>livegoods-buyaction-message-consumer</module>
+        <module>livegoods-buytime</module>
+        <module>livegoods-cache-redis</module>
+        <module>livegoods-comment</module>
+        <module>livegoods-commons</module>
+        <module>livegoods-detail</module>
+        <module>livegoods-gateway</module>
+        <module>livegoods-hotproduct</module>
+        <module>livegoods-login</module>
+        <module>livegoods-mongodb-dao</module>
+        <module>livegoods-order</module>
+        <module>livegoods-rabbit-publisher</module>
+        <module>livegoods-recommendation</module>
+        <module>livegoods-search</module>
+    </modules>
+
+    <!--管理版本-->
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-boot-version>2.6.3</spring-boot-version>
+        <cloud-version>2021.0.0</cloud-version>
+        <lcn-version>5.0.0</lcn-version>
+        <fastdfs-version>1.26.5</fastdfs-version>
+        <commons-lang-version>3.4</commons-lang-version>
+        <lombok-version>1.18.24</lombok-version>
+        <config-client-version>2.2.8.RELEASE</config-client-version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-version}
+                </version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok-version}</version>
+            </dependency>
+
+            <!-- fastdfs -->
+            <dependency>
+                <groupId>com.github.tobato</groupId>
+                <artifactId>fastdfs-client</artifactId>
+                <version>${fastdfs-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang-version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!--SpringBoot打包插件-->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!--docker镜像插件-->
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>1.0.0</version>
+                </plugin>
+
+                <!--maven打包插件-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <target>8</target>
+                        <source>8</source>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

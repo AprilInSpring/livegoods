@@ -1,0 +1,24 @@
+server:
+  port: 9010
+spring:
+  application:
+    name: livegoods-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/ccg2022/cloud-config.git
+          search-paths:
+            - livegoods
+      label: master
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.66.100:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  pattern:
+    console: '%d{MM/dd HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'

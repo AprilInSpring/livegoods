@@ -1,0 +1,4 @@
+livegoods:
+  banner:
+    nginx:
+      prefix: http://192.168.66.100:8888/

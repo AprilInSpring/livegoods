@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: livegoods-message-consumer
+  profiles:
+    active: itemCacheName,mongodb,redis
+  cloud:
+    config:
+      uri: http://localhost:9010
+      label: master
+      name: rabbit
+      profile: dev
+    stream:
+      bindings:
+        livegoodsMessenger-in-0:
+          destination: livegoodsTopic # 对应的真实的 RabbitMQ Exchange
+        livegoodsMessenger-out-0:
+          destination: livegoodsTopic
+      function:
+        definition: livegoodsMessenger
+
+logging:
+  pattern:
+    console: '%d{MM/dd HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'

@@ -1,0 +1,81 @@
+server:
+  port: 4006
+spring:
+  application:
+    name: livegoods-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false 	#不开启服务注册和发现的功能,不使用自己的注册发现,采取eureka的注册发现
+          lower-case-service-id: true #请求路径上的服务名称转换为小写
+      routes:
+        - id: banner
+          uri: lb://livegoods-banner
+          predicates:
+            - Path=/banner
+        - id: hotproduct
+          uri: lb://livegoods-hot-product
+          predicates:
+            - Path=/hotProduct
+            - Query=city  #请求中，必须包含city参数
+        - id: recommendation
+          uri: lb://livegoods-recommendation
+          predicates:
+            - Path=/recommendation
+            - Query=city  #请求中，必须包含city参数
+        - id: details
+          uri: lb://livegoods-details
+          predicates:
+            - Path=/details/**
+        - id: comment   #商品评论路由
+          uri: lb://livegoods-comment
+          predicates:
+            - Path=/comment
+            - Query=id
+            - Query=page
+        - id: search   #搜索路由
+          uri: lb://livegoods-search
+          predicates:
+            - Path=/search
+            - Query=city
+            - Query=content
+            - Query=page
+        - id: sendyzm   #发送验证码
+          uri: lb://livegoods-login
+          predicates:
+            - Path=/sendyzm
+        - id: login   #登录
+          uri: lb://livegoods-login
+          predicates:
+            - Path=/login
+        - id: buyaction   #预订
+          uri: lb://livegoods-buyaction
+          predicates:
+            - Path=/buyaction
+        - id: buytime   #预订时间
+          uri: lb://livegoods-buytime
+          predicates:
+            - Path=/buytime
+            - Query=id
+        - id: order   #订单
+          uri: lb://livegoods-order
+          predicates:
+            - Path=/order
+            - Query=user
+        - id: feelback   #评论
+          uri: lb://livegoods-comment
+          predicates:
+            - Path=/feelback
+            - Query=orderId
+            - Query=feelback
+    #cloudconfig配置中心地址
+    config:
+      uri: http://localhost:9010
+      label: master
+      name: livegoods
+      profile: dev
+
+logging:
+  pattern:
+    console: '%d{MM/dd HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'

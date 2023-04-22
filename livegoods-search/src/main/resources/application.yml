@@ -1,0 +1,23 @@
+server:
+  port: 9003
+livegoods:
+  search:
+    init:
+      enabled: true # 配置是否需要初始化索引，创建和设置映射。默认为false
+spring:
+  profiles:
+    active: mongodb,bannerNgix
+  application:
+    name: livegoods-search
+  elasticsearch:
+    uris: http://192.168.66.100:9200
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.66.100:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  pattern:
+    console: '%d{MM/dd HH:mm:ss.SSS} %clr(%-5level) ---  [%-15thread] %cyan(%-50logger{50}):%msg%n'
